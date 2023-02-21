@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const routerModels = require('./routes/models.router')
 const routerErrorHandler = require('./routes/errorhandler.router')
+const swaggerJSDocs = require('./swagger')
 
 
 const app = express()
@@ -55,7 +56,8 @@ app.get('/', ({ res }) => {
 /*
 Routes
 */
-routerModels(app)
+// swaggerJSDocs(app, PORT)
+routerModels(app, PORT)
 routerErrorHandler(app)
 
 app.listen(PORT, () => {
