@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Profiles extends Model {
     static associate(models) {
       Profiles.belongsTo(models.Users, { as: 'user', foreignKey: 'user_id' })
-      Profiles.belongsTo(models.Roles, { as: 'role', foreignKey: 'role_id' })
+      Profiles.belongsTo(models.Roles, { as: 'roles', foreignKey: 'role_id' })
     }
   }
   Profiles.init({
@@ -16,8 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false,
     },
-    user_id: DataTypes.UUID,
-    role_id: DataTypes.INTEGER,
+    user_id: {type:DataTypes.UUID,
+    foreignKey:true
+    },
+    role_id: {type:DataTypes.INTEGER,
+      foreignKey:true
+    },
   }, {
     sequelize,
     modelName: 'Profiles',

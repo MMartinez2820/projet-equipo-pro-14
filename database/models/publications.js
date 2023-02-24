@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       primaryKey: true
     },
-    profile_id: {
+    user_id: {
       type:DataTypes.UUID,
       primaryKey: true
     },
@@ -39,7 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     tittle: {
       type:DataTypes.STRING, 
       allowNull:false},
-    description: DataTypes.STRING,
+    description: {type:DataTypes.STRING,
+      allowNull:false
+    },
     content: DataTypes.TEXT,
     picture: DataTypes.STRING,
     image_url: DataTypes.STRING
@@ -49,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: "publications",
     underscored: true,
     timestamps: true,
+     scopes: {
+      no_timestamps: { attributes: { exclude: ['createdAt', 'updatedAt'] } }
+    }
   },);
   
 

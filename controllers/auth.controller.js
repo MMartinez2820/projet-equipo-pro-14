@@ -5,15 +5,14 @@ const jwt = require('jsonwebtoken')
 const sender = require('../libs/nodemailer')
 require('dotenv').config()
 
-const authService = new AuthService()
-const usersService = new UsersService()
+
 
 const logIn = async (request, response, next) => {
     
   try {
     
     const { email, password } = request.body    
-    const user = await authService.checkUsersCredentials(email, password)
+    const user = await AuthService.checkUsersCredentials(email, password)
     
     const token = jwt.sign({
       id: user.id,
@@ -35,7 +34,7 @@ const signUp = async (request, response, next) => {
   try {
     let { body } = request;
     let errors = []
-    let user = await usersService.createAuthUser(body);
+    let user = await UsersService.createAuthUser(body);
     try {
       await sender.sendMail({
         from: process.env.MAIL_SEND,
@@ -62,8 +61,8 @@ const signUp = async (request, response, next) => {
 const forgetPassword = async (request, response, next) => {
   const { email } = request.body
   try {
-    let userAndToken = await authService.createRecoveryToken(email)
-    let user = await usersService.setTokenUser(userAndToken.user.id, userAndToken.token)
+    let userAndToken = await AuthService.createRecoveryToken(email)
+    let user = await UsersService.setTokenUser(userAndToken.user.id, userAndToken.token)
     
     try {
       await sender.sendMail({
@@ -100,7 +99,7 @@ const restorePassword = async (request, response, next) => {
 const userToken = async (request, response, next) => {
   try {    
     let id = request.user.id
-    let user = await authService.userToken(id)
+    let user = await AuthService.userToken(id)
     return response.json({results:user})    
   } catch (error) {
     next(error)

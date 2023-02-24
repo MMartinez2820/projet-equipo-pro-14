@@ -9,7 +9,7 @@ class UsersService {
   constructor() {
   }
 
-  async findAndCount(query) {
+  static async findAndCount(query) {
     const options = {
       where: {},
     }
@@ -37,7 +37,7 @@ class UsersService {
     return users
   }
 
-  async createAuthUser(obj) {
+  static async createAuthUser(obj) {
     const transaction = await models.sequelize.transaction()
     try {
 
@@ -91,7 +91,7 @@ class UsersService {
     }
   }
 
-  async removeUser(id) {
+  static async removeUser(id) {
     const transaction = await models.sequelize.transaction()
     try {
       let user = await models.Users.findByPk(id)

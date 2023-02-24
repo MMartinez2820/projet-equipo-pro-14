@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   states.init({
     id:{type: DataTypes.INTEGER,
       primaryKey: true},
-    country_id: DataTypes.INTEGER,
+    country_id: {type:DataTypes.INTEGER,
+    primaryKey:true},
     name: DataTypes.STRING
   }, {
     sequelize,

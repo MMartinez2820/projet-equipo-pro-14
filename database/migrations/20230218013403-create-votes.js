@@ -10,16 +10,26 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       publication_id: {
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        foreignKey: true,
+        references: {
+          model: 'publications',
+          key: 'id'}
       },
-      profile_id: {
-        type: Sequelize.UUID
+      user_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        foreignKey: true,
+        references: {
+          model: 'users',
+          key: 'id'}
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

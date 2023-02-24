@@ -1,15 +1,25 @@
 const UsersService = require('../services/users.service');
 const sender = require('../libs/nodemailer');
 require('dotenv').config();
+const { getPagination, getPagingData } = require('../utils/helpers')
 
-const getAllUsers = async (req, res, next)=>{
+
+
+const getUsers = async (request, response, next) => {
     try {
-        const allUsers = await UsersService.getUsersAll();
-        res.json(allUsers)
+      let query = request.query
+      let { page, size } = query
+      const { limit, offset } = getPagination(page, size, '10')
+      query.limit = limit
+      query.offset = offset
+  
+      let Users = await UsersService.findAndCount(query)
+      const results = getPagingData(Users, page, limit)
+      return response.json({ results: results })
     } catch (error) {
-        console.log(error);
+      next(error)
     }
-}
+  }
 
 const getUserById = async (req, res, next)=>{
     try {
@@ -40,11 +50,23 @@ const userUpdate = async (req, res, next) =>{
     } catch (error) {
         console.log(error);
     }
+    
 }
 
+const removeUser = async (request, response, next) => {
+    try {
+      const{ id } = request.params
+      const User = await UsersService.removeUser(id)
+      return response.json({ results: User, message: 'removed' })
+    } catch (error) {
+      next(error)
+    }
+  }
+
 module.exports={
-  getAllUsers,
+    getUsers,
   getUserById,
-  userUpdate
+  userUpdate,
+  removeUser
 };
 
