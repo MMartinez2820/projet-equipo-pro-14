@@ -54,3 +54,48 @@ Hecho eso, con el siguiente commando estaría listo:
 ```
 
 Existe una explicación en el notion del proyecto que explica el ___Dockerfile___ y ___docker-compose.yml___
+
+
+## ejemplo de components users
+//user
+  /**
+   * @openapi
+   * components:
+   *  schemas:
+   *    users:
+   *      type: object
+   *      properties:
+   *        first_name:
+   *          type: string
+   *          description: the user name
+   *        last_name:
+   *          type: string
+   *          description: user apellido
+   *        email:
+   *          type: string
+   *          description: user email
+   *        username:
+   *          type: string
+   *          description: user name users
+   *        password:
+   *          type: string
+   *          description: user password
+   *        phone:
+   *          type: string
+   *          description: user phone
+   *      required:
+   *        - first_name
+   *        - last_name
+   *        - email
+   *        - username
+   *        - password
+   *        - phone
+   *      example:
+   *        first_name: miguel
+   *        last_name: martinez
+   *        email: 201808724@p.uapa.edu.do
+   *        username: admi
+   *        password: 1234
+   *        phone: 2458321
+   */
+    

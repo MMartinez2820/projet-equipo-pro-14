@@ -57,7 +57,7 @@
  *                   example: Not Found User
  * /api/v1/auth/me:
  *   get:
- *     summary: get the profiles associated with the user´s account
+ *     summary: get the profiles associated with the users account
  *     tags:
  *       - Auth
  *     parameters:
@@ -79,7 +79,7 @@
  *                 profiles:
  *                   type: array
  *                   items:
- *                   $ref: '#/comnponents/schema/profilesMe'
+ *                   $ref: '#/components/schema/profilesMe'
  * /api/v1/auth/forget-password:
  *   post:
  *     summary: Reset user Password
