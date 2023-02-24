@@ -9,7 +9,7 @@ class UsersService {
   constructor() {
   }
 
-  async findAndCount(query) {
+  static async findAndCount(query) {
     const options = {
       where: {},
     }
@@ -37,7 +37,7 @@ class UsersService {
     return users
   }
 
-  async createAuthUser(obj) {
+  static async createAuthUser(obj) {
     const transaction = await models.sequelize.transaction()
     try {
 
@@ -64,23 +64,23 @@ class UsersService {
     return user
   }
 
-  async getUser(id) {
-    let user = await models.Users.findByPk(id)
+  static async getUser(id) {
+    const user = await models.Users.findByPk(id)
     if (!user) throw new CustomError('Not found User', 404, 'Not Found')
     return user
   }
 
-  async findUserByEmailOr404(email) {
+  static async findUserByEmailOr404(email) {
     if(!email) throw new CustomError('Email not given', 400, 'Bad Request')
-    let user = await models.Users.findOne({where: {email}}, { raw: true })
+    const user = await models.Users.findOne({where: {email}}, { raw: true })
     if (!user) throw new CustomError('Not found User', 404, 'Not Found')
     return user
   }
 
-  async updateUser(id, obj) {
+  static async updateUser(id, obj) {
     const transaction = await models.sequelize.transaction()
     try {
-      let user = await models.Users.findByPk(id)
+      const user = await models.Users.findByPk(id)
       if (!user) throw new CustomError('Not found user', 404, 'Not Found')
       let updatedUser = await user.update(obj, { transaction })
       await transaction.commit()
@@ -91,7 +91,7 @@ class UsersService {
     }
   }
 
-  async removeUser(id) {
+  static async removeUser(id) {
     const transaction = await models.sequelize.transaction()
     try {
       let user = await models.Users.findByPk(id)

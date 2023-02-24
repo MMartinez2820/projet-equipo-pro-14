@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Users.belongsTo(models.Countries, { as: 'country', foreignKey: 'country_id' })
       Users.hasMany(models.Profiles, { as: 'profiles', foreignKey: 'user_id' })
+      Users.hasMany(models.Publications, {as:"publications", foreignKey:"user_id"})
+      Users.belongsToMany(models.Publications,{through:"publication", foreignKey: "publication_id"})
+      //Users.belongsToMany(models.Tags, {through:"tag", foreignKey:"tag_id"});
     }
   }
   

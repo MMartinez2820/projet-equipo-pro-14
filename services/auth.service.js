@@ -5,19 +5,19 @@ const { comparePassword } = require('../libs/bcrypt');
 const jwt = require('jsonwebtoken');
 const { CustomError } = require('../utils/helpers');
 
-const usersService = new UsersService();
+
 
 class AuthService {
   constructor() {}
 
-  async checkUsersCredentials(email, password) {
-    let user = await usersService.findUserByEmailOr404(email);
+ static  async checkUsersCredentials(email, password) {
+    const user = await UsersService.findUserByEmailOr404(email);
     let verifyPassword = comparePassword(password, user.password);
     return user;
   }
 
-  async createRecoveryToken(email) {
-    let user = await usersService.findUserByEmailOr404(email);
+   static async createRecoveryToken(email) {
+   const user = await UsersService.findUserByEmailOr404(email);
     const token = jwt.sign(
       {
         id: user.id,
@@ -31,7 +31,7 @@ class AuthService {
 
   async changePassword({ id, exp }, newPassword, token) {
     await usersService.verifiedTokenUser(id, token, exp);
-    let updatedUser = await usersService.updatePassword(id, newPassword);
+    let updatedUser = await UsersService.updatePassword(id, newPassword);
     return updatedUser;
   }
 
