@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
      Publications.belongsTo(models.Users, {as:"user", foreignKey:"user_id"})
-     Publications.belongsTo(models.publications_types,{as:"publications_types", foreignKey:"publication_types_id"})
+     Publications.belongsTo(models.publications_types,{as:"publications_types", foreignKey:"publication_type_id"})
      Publications.belongsTo(models.Cities, {as:"city", foreignKey:"city_id"})
      Publications.belongsToMany(models.Users,{through:"users", foreignKey:"user_id"})
     // Publications.belongsToMany(models.Tags,{through:"tags", foreignKey:"tags_id"})
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Publications.init({
     id: {
-      type:DataTypes.INTEGER,
+      type:DataTypes.UUID,
       primaryKey: true
     },
     user_id: {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true
     },
     publication_type_id:{
-      type:DataTypes.INTEGER,
+      type:DataTypes.UUID,
        primaryKey: true
       },
     city_id: {

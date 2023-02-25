@@ -5,9 +5,9 @@ module.exports = {
     await queryInterface.createTable('publications_types', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        autoIncrement:true,
+        type: Sequelize.UUID
       },
       name: {
         type: Sequelize.STRING
