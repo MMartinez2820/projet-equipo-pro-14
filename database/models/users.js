@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       //Users.belongsToMany(models.Tags, {through:"tag", foreignKey:"tag_id"});
     }
   }
+  
   Users.init({
     id: {
       type:DataTypes.UUID,
