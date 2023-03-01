@@ -40,11 +40,7 @@
  *         content: 
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: Correct Credentials
+ *               $ref: '#components/schema/loginResponse'
  *       404:
  *         description: Not Found
  *         content:
@@ -57,16 +53,20 @@
  *                   example: Not Found User
  * /api/v1/auth/me:
  *   get:
+ *     security:
+ *       - beareAuth: []
  *     summary: get the profiles associated with the users account
  *     tags:
  *       - Auth
- *     parameters:
- *       - in: header
- *         name: token
- *         type: string
- *         required: true
+ *     requestBody:
+ *       description: Required fields for the user to login
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schema/meGet'
  *     responses:
- *       201:
+ *       200:
  *         description: OK
  *         content:
  *           application/json:
@@ -78,10 +78,11 @@
  *                   $ref: '#/components/schema/responseMe'
  *                 profiles:
  *                   type: array
- *                   items:
- *                   $ref: '#/components/schema/profilesMe'
+ *                   example: [ { "id": "6", "user_id": "740273ca-b792-4129-a050-2fc01957d94d", "role_id": 1, "created_at": "2023-02-09T23:32:03.233Z", "updated_at": "2023-02-09T23:32:03.233Z" } ]
  * /api/v1/auth/forget-password:
  *   post:
+ *     security:
+ *       - beareAuth: []
  *     summary: Reset user Password
  *     tags:
  *       - Auth
@@ -105,24 +106,18 @@
  *                   example: Email sended!, check your inbox
  * /api/v1/auth/change-password/{token}:
  *   post:
+ *     security:
+ *       - bearerAuth: []
  *     summary: Change user password
  *     tags:
  *       - Auth
- *     parameters:
- *       - name: token
- *         in: query
- *         required: true
- *         schema:
- *           type: string
- *           minium: 1
- *         description: User Token
  *     requestBody:
- *       description: Required fields to change password
+         description: Required fields to change password
  *       required: true
- *       content:
- *         application/json:
+         content:
+           application/json:
  *         schema:
- *           $ref: '#/components/schema/forget-password'
+ *           $ref: '#/components/schema/change-password'
  *     responses:
  *       201:
  *         description: OK
