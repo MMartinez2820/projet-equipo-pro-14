@@ -1,9 +1,10 @@
 const {v4: uuid4} = require('uuid');
 const models = require('../database/models')
+const uuid = require('uuid')
 const { Op } = require('sequelize')
 const  {CustomError}  = require('../utils/helpers');
 const { hashPassword } = require('../libs/bcrypt');
-
+const UsersService = require("./users.service");
 class PublicationsService{
 
     constructor() {
@@ -36,18 +37,20 @@ class PublicationsService{
         return publications
       }
 
-     static async createPublication(obj){
+     static async createPublication(obj, id){
+   
         const transaction = await models.sequelize.transaction()
         try {
-          const newPublication = await models.Publications.create(
+           const userId=await models.Users.findByPk(id)
+          let newPublication = await models.Publications.create(
             {
-                id: uuid4(),
-               /* user_id: obj.user_id,
-                publication_type_id: obj.publication_type_id,
-                city_id: obj.city_id,*/
+              id: uuid.v4(),
+                user_id: obj.user_id,
+                publication_type_id: obj.publications_types_id,
+                city_id: obj.city_id,
                 tittle: obj.tittle,
                 description: obj.description,
-                content: obj.content,
+                content: obj.content
             },{transaction})
     
           await transaction.commit()

@@ -12,7 +12,15 @@ const { signUp, logIn,forgetPassword,restorePassword,userToken } = require('../c
 router.post('/login', logIn) 
 
 router.post('/sign-up', verifySchema(signupSchema, 'body'), signUp) 
-
+/* ejemplo:
+{
+  "first_name":"rosario",
+  "last_name":"battaglia",
+  "email":"rosari@gmail.com",
+  "password":"123456"
+ 
+}
+*/
 router.post('/forget-password', verifySchema(forgetPasswordSchema, 'body'), forgetPassword) 
 
 router.post('/change-password/:token', verifySchema(restorePasswordSchema, 'body'), restorePassword) 

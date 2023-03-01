@@ -5,9 +5,8 @@ module.exports = {
     await queryInterface.createTable('publications', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       user_id: {
         type: Sequelize.UUID,
@@ -21,7 +20,7 @@ module.exports = {
         onDelete: 'RESTRICT'
       },
       publication_type_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         foreignKey: true,
         references: {
@@ -32,7 +31,7 @@ module.exports = {
         onDelete: 'RESTRICT'
       },
       city_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         foreignKey: true,
         references: {
