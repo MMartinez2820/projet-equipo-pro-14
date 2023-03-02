@@ -1,29 +1,18 @@
 const express = require('express');
 const router = express.Router()
-const {checkRole} = require("../middlewares/checkRole");
-const {UserMiddleware} = require("../middlewares/User.middleware");
-const passport = require('../libs/passport')
+const passport = require('../libs/passport');
+const { checkRole } = require('../middlewares/checkRole');
 const { getUsers,getUserById, userUpdate, removeUser } = require("../controllers/users.controller"); 
-const { addPublication } = require("../controllers/publications.controller");
 
-router.get("/", 
-passport.authenticate('jwt', { session: false }),
-checkRole, getUsers
-);
 
-router.get("/:id",  
-passport.authenticate('jwt', { session: false }),
-UserMiddleware, getUserById);
+router.get("/",passport.authenticate('jwt', { session: false }),checkRole, getUsers);
 
-router.post("/:id/publication", addPublication)
+router.get("/:id",passport.authenticate('jwt', { session: false }),checkRole, getUserById);
 
-router.put("/:id", 
-passport.authenticate('jwt', { session: false }),
-UserMiddleware, userUpdate);
 
-router.delete("/:id",  
-passport.authenticate('jwt', { session: false }),
-removeUser);
+router.put("/:id",passport.authenticate('jwt', { session: false }),checkRole, userUpdate);
+
+router.delete("/:id",passport.authenticate('jwt', { session: false }),checkRole,  removeUser);
 
 
 module.exports=router;
