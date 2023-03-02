@@ -19,8 +19,8 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'RESTRICT'
       },
-      publication_type_id: {
-        type: Sequelize.UUID,
+      publications_types_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         foreignKey: true,
         references: {
@@ -31,7 +31,7 @@ module.exports = {
         onDelete: 'RESTRICT'
       },
       city_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         allowNull: false,
         foreignKey: true,
         references: {

@@ -5,8 +5,9 @@ module.exports = {
     await queryInterface.createTable('states', {
       id: {
         allowNull: false,
-        primaryKey: true,
-        type: Sequelize.UUID
+          autoIncrement: true,
+          primaryKey: true,
+          type: Sequelize.INTEGER
       },
       country_id: {
         type: Sequelize.INTEGER,

@@ -6,15 +6,19 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID
+        autoIncrement: true,
+        type: Sequelize.INTEGER
       },
       state_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
           allowNull: true,
           foreignKey: true,
           references: {
             model: 'states',
             key: 'id'}
+      },
+      name: {
+        type: Sequelize.STRING
       },
       created_at: {
         allowNull: false,

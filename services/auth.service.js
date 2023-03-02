@@ -30,7 +30,7 @@ class AuthService {
   }
 
   async changePassword({ id, exp }, newPassword, token) {
-    await usersService.verifiedTokenUser(id, token, exp);
+    await UsersService.verifiedTokenUser(id, token, exp);
     let updatedUser = await UsersService.updatePassword(id, newPassword);
     return updatedUser;
   }

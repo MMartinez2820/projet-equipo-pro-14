@@ -65,7 +65,7 @@ class RolesService {
   }
 
   async findRoleByName(name) {
-    let role = await models.Roles.findOne({where: {name}}, { raw: true })
+    let role = await models.Roles.findOne({where: { name }}, { raw: true })
     return role
   }
 

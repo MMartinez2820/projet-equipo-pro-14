@@ -1,7 +1,7 @@
 const models = require('../database/models')
 const uuid = require('uuid')
 const { Op } = require('sequelize')
-
+const  {CustomError}  = require('../utils/helpers')
 
 class StatesService {
 
@@ -28,14 +28,14 @@ class StatesService {
     //Necesario para el findAndCountAll de Sequelize
     options.distinct = true
 
-    const states = await models.States.findAndCountAll(options)
+    const states = await models.states.findAndCountAll(options)
     return states
   }
 
   async createState(obj) {
     const transaction = await models.sequelize.transaction()
     try {
-      let newState = await models.States.create({
+      let newState = await models.states.create({
         id: uuid.v4(),
         country_id: obj.country_id,
         name: obj.name
@@ -50,13 +50,13 @@ class StatesService {
   }
   
   async getStateOr404(id) {
-    let state = await models.States.findByPk(id, { raw: true })
+    let state = await models.states.findByPk(id, { raw: true })
     if (!state) throw new CustomError('Not found State', 404, 'Not Found')
     return state
   }
 
   async getState(id) {
-    let state = await models.States.findByPk(id)
+    let state = await models.states.findByPk(id)
     if (!state) throw new CustomError('Not found State', 404, 'Not Found')
     return state
   }
@@ -64,11 +64,11 @@ class StatesService {
   async updateState(id, obj) {
     const transaction = await models.sequelize.transaction()
     try {
-      let state = await models.States.findByPk(id)
+      let state = await models.states.findByPk(id)
 
       if (!state) throw new CustomError('Not found State', 404, 'Not Found')
 
-      let updatedState = await state.update(obj, { transaction })
+      let updatedState = await states.update(obj, { transaction })
 
       await transaction.commit()
 
@@ -82,7 +82,7 @@ class StatesService {
   async removeState(id) {
     const transaction = await models.sequelize.transaction()
     try {
-      let state = await models.States.findByPk(id)
+      let state = await models.states.findByPk(id)
 
       if (!state) throw new CustomError('Not found State', 404, 'Not Found')
 

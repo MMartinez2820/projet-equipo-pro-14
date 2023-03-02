@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      publications_types.hasMany(models.Publications, {as:"publications_types", foreignKey:"publication_type_id"})
+      publications_types.hasMany(models.Publications, {as:"publications", foreignKey:"publications_types_id"})
     }
   }
   publications_types.init({
-    id:{type: DataTypes.UUID,
+    id:{type: DataTypes.INTEGER,
       primaryKey: true
     },
     name: {type:DataTypes.STRING, allowNull:false},
