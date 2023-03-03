@@ -116,8 +116,8 @@
  *       required: true
          content:
            application/json:
- *         schema:
- *           $ref: '#/components/schema/change-password'
+ *           schema:
+ *             $ref: '#/components/schema/change-password'
  *     responses:
  *       201:
  *         description: OK
