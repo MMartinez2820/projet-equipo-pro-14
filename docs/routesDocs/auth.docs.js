@@ -112,10 +112,10 @@
  *     tags:
  *       - Auth
  *     requestBody:
-         description: Required fields to change password
+ *       description: Required fields to change password
  *       required: true
-         content:
-           application/json:
+ *       content:
+ *         application/json:
  *           schema:
  *             $ref: '#/components/schema/change-password'
  *     responses:

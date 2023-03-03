@@ -4,7 +4,7 @@ const helmet = require('helmet')
 require('dotenv').config()
 const routerModels = require('./routes/models.router')
 const routerErrorHandler = require('./routes/errorhandler.router')
-const swaggerJSDocs = require("./swagger");
+const swaggerDocs = require("./swagger");
 
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -55,8 +55,8 @@ app.get('/', ({ res }) => {
 Routes
 */
 
-swaggerJSDocs(app);
-routerModels(app);
+swaggerDocs(app, PORT);
+routerModels(app, PORT);
 routerErrorHandler(app);
 
 

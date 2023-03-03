@@ -64,7 +64,7 @@ class UsersService {
     return user
   }
 
-  static async getUser(id) {
+  async getUser(id) {
     const user = await models.Users.findByPk(id)
     if (!user) throw new CustomError('Not found User', 404, 'Not Found')
     return user

@@ -66,7 +66,7 @@
  *               properties:
  *                 first_name:
  *                   type: string
- *                   example: Oscar
+ *                   example: Rodrigo
  *                 last_name: 
  *                   type: string
  *                   example: Apellido
@@ -146,7 +146,7 @@
  *       responses:
  *         200:
  *           description: Ok
- *           content: 
+ *           content:
  *             application/json:
  *               schema:
  *                 type: object

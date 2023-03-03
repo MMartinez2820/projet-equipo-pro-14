@@ -62,7 +62,7 @@
  *           oneOf:
  *             - type: string
  *             - type: integer
- *            example: 548263ca-b792-4129-a050-2fc01955k94l
+ *           example: 548263ca-b792-4129-a050-2fc01955k94l
  *         first_name:
  *           type: string
  *           example: Rodrigo

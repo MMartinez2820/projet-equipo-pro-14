@@ -25,8 +25,8 @@ const options = {
 };
 const swaggerSpec = swaggerJSDoc(options);
 
-const swaggerJSDocs = (app, port) => {
-  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+const swaggerDocs = (app, port) => {
+  app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
   app.get("/docs.json", (req, res) => {
     res.setHeader({"Content-Type" : "application/json"});
     res.send(swaggerSpec)
@@ -34,4 +34,4 @@ const swaggerJSDocs = (app, port) => {
   console.log(`Documentacion disponible ${process.env.URL}:${port}/api/v1/docs`)
 
 }
-module.exports = swaggerJSDocs;
+module.exports = swaggerDocs;
